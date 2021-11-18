@@ -103,8 +103,8 @@ class PosNegTemplateGeneratorApp2(GenericTemplateGeneratorApp2):
         return sentences
 
 
-    def generate_templates(self, texts_input, n_masks=2, range_words=2, min_classification_score=0.9):
-        return super().generate_templates(texts_input, self.relevant_tags, n_masks, range_words, min_classification_score)
+    def generate_templates(self, texts_input, n_masks=2, range_words=2):
+        return super().generate_templates(texts_input, self.relevant_tags, n_masks, range_words)
 
 
 class PosNegTemplateGeneratorApp3(GenericTemplateGeneratorApp3):
