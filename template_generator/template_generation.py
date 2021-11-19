@@ -4,6 +4,7 @@ from .oracle_model import OracleModel
 
 from abc import ABC, abstractmethod
 import pandas as pd
+import random
 
 class TemplateGenerator(ABC):
 
@@ -97,7 +98,19 @@ class GenericTemplateGeneratorApp1(TemplateGenerator):
         sentences = RelevantWordsFilter.apply(sentences, relevant_tags, range_words)
         print(f':: {len(sentences)} sentences remaining.')
 
-        # 5. Replacing the n most relevant words with masks
+        # 5. Predicting sentences with oracle models
+        predictions = self.oracle_model.predict_all(sentences)
+        print(f':: Sentence predictions done.')
+
+        # 6. Filtering sentences classified unanimously
+        sentences, predictions = UnanimousClassificationFilter.apply(sentences, predictions)
+        print(f':: {len(sentences)} sentences remaining.')
+        
+        # 6.1 Setting prediction to sentence
+        for sent, preds in zip(sentences, predictions):
+            sent.prediction = preds[0]
+            
+        # 7. Replacing the n most relevant words with masks
         sentences = self.replace_with_masks(sentences, n_masks)
         self.sentences = sentences
 
@@ -288,3 +301,38 @@ class GenericTemplateGeneratorApp5(TemplateGenerator):
 
         return sentences
 
+
+# Random Approach
+class GenericTemplateGeneratorRandom(TemplateGenerator):
+    
+    def generate_templates(self, texts_input, n_masks=2, k_templates=10):
+        instances = [Instance(text) for text in texts_input]
+
+        # 1. Break instances into sentences
+        print('Converting texts to sentences...')
+        sentences = []
+        for instance in instances:
+            sentences.extend(instance.split_to_sentences())
+        print(f':: {len(sentences)} sentences were generated.')
+        
+        # 2. Sampling n sentences randomly
+        sentences = random.sample(sentences, k_templates)
+
+        # 3. Ranking words by its importance when predicted by target model
+        sentences = self.word_ranker.rank(sentences, self.model)
+        print(f':: Word ranking done.')
+
+        # 4. Predicting sentences with oracle models
+        predictions = self.oracle_model.predict_all(sentences)
+        print(f':: Sentence predictions done.')
+
+        #4.1 Setting prediction to sentence
+        for sent, preds in zip(sentences, predictions):
+            sent.prediction = preds[0]
+
+        # 5. Replacing the n most relevant words with masks
+        sentences = self.replace_with_masks(sentences, n_masks)
+        self.sentences = sentences
+
+        return sentences
+        
