@@ -14592,7 +14592,7 @@ Loading model textattack/bert-base-uncased-rotten-tomatoes...
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">templates</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">generate_templates</span><span class="p">(</span><span class="n">instances</span><span class="p">,</span> <span class="n">ranked_words_count</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">min_classification_score</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">templates</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">generate_templates</span><span class="p">(</span><span class="n">instances</span><span class="p">,</span>  <span class="n">n_masks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ranked_words_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_classification_score</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14646,13 +14646,13 @@ Predicting inputs...
 :: Sentence predictions done.
 Filtering instances classified unanimously...
 :: 2 sentences remaining.
-Filtering instances by classification score greater than 0.8
+Filtering instances by classification score greater than 0.9
 :: 2 sentences remaining.
 Ranking words using Replace-1 Score...
 :: Word ranking done.
 Filtering instances by relevant words...
 :: 0 sentences remaining.
-Filtering instances by relevant words classification score greater than 0.8
+Filtering instances by relevant words classification score greater than 0.9
 :: 0 sentences remaining.
 </pre>
 </div>
@@ -14795,7 +14795,7 @@ Filtering instances by relevant words classification score greater than 0.8
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tg</span> <span class="o">=</span> <span class="n">PosNegTemplateGeneratorApp4</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">models</span><span class="p">)</span>
-<span class="n">templates</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">generate_templates</span><span class="p">(</span><span class="n">instances</span><span class="p">,</span> <span class="n">ranked_words_count</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">min_classification_score</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">templates</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">generate_templates</span><span class="p">(</span><span class="n">instances</span><span class="p">,</span>  <span class="n">n_masks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ranked_words_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_classification_score</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14849,14 +14849,14 @@ Predicting inputs...
 :: Sentence predictions done.
 Filtering instances classified unanimously...
 :: 90 sentences remaining.
-Filtering instances by classification score greater than 0.8
-:: 83 sentences remaining.
+Filtering instances by classification score greater than 0.9
+:: 61 sentences remaining.
 Ranking words using Replace-1 Score...
 :: Word ranking done.
 Filtering instances by relevant words...
-:: 35 sentences remaining.
-Filtering instances by relevant words classification score greater than 0.8
-:: 25 sentences remaining.
+:: 43 sentences remaining.
+Filtering instances by relevant words classification score greater than 0.9
+:: 37 sentences remaining.
 </pre>
 </div>
 </div>
@@ -14925,178 +14925,262 @@ Filtering instances by relevant words classification score greater than 0.8
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
-      <td>intelligent  caustic take on a great writer and dubious human being .</td>
-      <td>{mask} caustic take on a great writer and dubious {mask} being .</td>
-      <td>{pos_adj} caustic take on a great writer and dubious {neg_adj} being .</td>
+      <td>0</td>
+      <td>involving at times  but lapses quite casually into the absurd .</td>
+      <td>involving at times but {mask} quite casually into the absurd .</td>
+      <td>involving at times but {neg_verb} quite casually into the absurd .</td>
     </tr>
     <tr>
       <th>1</th>
       <td>0</td>
-      <td>it's a bad sign in a thriller when you instantly know whodunit .</td>
-      <td>it 's a {mask} sign in a thriller when you instantly {mask} whodunit .</td>
-      <td>it 's a {neg_adj} sign in a thriller when you instantly {pos_verb} whodunit .</td>
+      <td>simply doesn't have sufficient heft to justify its two-hour running time .</td>
+      <td>simply {mask} n't have sufficient heft to justify its two-hour running time .</td>
+      <td>simply {neg_verb} n't have sufficient heft to justify its two-hour running time .</td>
     </tr>
     <tr>
       <th>2</th>
       <td>0</td>
-      <td>falsehoods pile up  undermining the movie's reality and stifling its creator's comic voice .</td>
-      <td>falsehoods {mask} up undermining the movie 's reality and stifling its creator 's {mask} voice .</td>
-      <td>falsehoods {neg_verb} up undermining the movie 's reality and stifling its creator 's {neg_adj} voice .</td>
+      <td>it's a bad sign in a thriller when you instantly know whodunit .</td>
+      <td>it 's a {mask} sign in a thriller when you instantly know whodunit .</td>
+      <td>it 's a {neg_adj} sign in a thriller when you instantly know whodunit .</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
-      <td>a long  dull procession of despair  set to cello music culled from a minimalist funeral .</td>
-      <td>a long {mask} procession of despair set to cello music culled from a {mask} funeral .</td>
-      <td>a long {neg_adj} procession of despair set to cello music culled from a {neg_adj} funeral .</td>
+      <td>falsehoods pile up  undermining the movie's reality and stifling its creator's comic voice .</td>
+      <td>falsehoods {mask} up undermining the movie 's reality and stifling its creator 's comic voice .</td>
+      <td>falsehoods {neg_verb} up undermining the movie 's reality and stifling its creator 's comic voice .</td>
     </tr>
     <tr>
       <th>4</th>
       <td>0</td>
-      <td>could the country bears really be as bad as its trailers ?</td>
-      <td>{mask} the country bears really be as {mask} as its trailers ?</td>
-      <td>{neg_verb} the country bears really be as {neg_adj} as its trailers ?</td>
+      <td>cacoyannis is perhaps too effective in creating an atmosphere of dust-caked stagnation and labored gentility .</td>
+      <td>cacoyannis is perhaps too effective in {mask} an atmosphere of dust-caked stagnation and labored gentility .</td>
+      <td>cacoyannis is perhaps too effective in {pos_verb} an atmosphere of dust-caked stagnation and labored gentility .</td>
     </tr>
     <tr>
       <th>5</th>
       <td>1</td>
-      <td>the movie is saved from unbearable lightness by the simplicity of the storytelling and the authenticity of the performances .</td>
-      <td>the movie is {mask} from {mask} lightness by the simplicity of the storytelling and the authenticity of the performances .</td>
-      <td>the movie is {pos_verb} from {neg_adj} lightness by the simplicity of the storytelling and the authenticity of the performances .</td>
+      <td>a rich tale of our times  very well told with an appropriate minimum of means .</td>
+      <td>a {mask} tale of our times very well told with an appropriate minimum of means .</td>
+      <td>a {pos_adj} tale of our times very well told with an appropriate minimum of means .</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0</td>
-      <td>an empty exercise  a florid but ultimately vapid crime melodrama with lots of surface flash but little emotional resonance .</td>
-      <td>an empty exercise a florid but ultimately {mask} crime melodrama with lots of surface flash but {mask} emotional resonance .</td>
-      <td>an empty exercise a florid but ultimately {neg_adj} crime melodrama with lots of surface flash but {neg_adj} emotional resonance .</td>
+      <td>1</td>
+      <td>achieves a sort of filmic epiphany that revels in the true potential of the medium .</td>
+      <td>achieves a sort of filmic epiphany that {mask} in the true potential of the medium .</td>
+      <td>achieves a sort of filmic epiphany that {pos_verb} in the true potential of the medium .</td>
     </tr>
     <tr>
       <th>7</th>
       <td>0</td>
-      <td>hugh grant's act is so consuming that sometimes it's difficult to tell who the other actors in the movie are .</td>
-      <td>hugh grant 's act is so {mask} that sometimes it 's {mask} to tell who the other actors in the movie are .</td>
-      <td>hugh grant 's act is so {neg_adj} that sometimes it 's {neg_adj} to tell who the other actors in the movie are .</td>
+      <td>a long  dull procession of despair  set to cello music culled from a minimalist funeral .</td>
+      <td>a long {mask} procession of despair set to cello music culled from a minimalist funeral .</td>
+      <td>a long {neg_adj} procession of despair set to cello music culled from a minimalist funeral .</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>0</td>
-      <td>opens at a funeral  ends on the protagonist's death bed and doesn't get much livelier in the three hours in between .</td>
-      <td>opens at a funeral ends on the protagonist 's death bed and {mask} n't get {mask} livelier in the three hours in between .</td>
-      <td>opens at a funeral ends on the protagonist 's death bed and {neg_verb} n't get {pos_adj} livelier in the three hours in between .</td>
+      <td>1</td>
+      <td>awesome creatures breathtaking scenery and epic battle scenes add up to another 'spectacular spectacle . '</td>
+      <td>awesome creatures {mask} scenery and epic battle scenes add up to another 'spectacular spectacle . '</td>
+      <td>awesome creatures {pos_verb} scenery and epic battle scenes add up to another 'spectacular spectacle . '</td>
     </tr>
     <tr>
       <th>9</th>
       <td>1</td>
-      <td>at its best  this is grand-scale moviemaking for a larger-than-life figure  an artist who has been awarded mythic status in contemporary culture .</td>
-      <td>at its best this is {mask} {mask} for a larger-than-life figure an artist who has been awarded mythic status in contemporary culture .</td>
-      <td>at its best this is {pos_adj} {pos_verb} for a larger-than-life figure an artist who has been awarded mythic status in contemporary culture .</td>
+      <td>a fascinating dark thriller that keeps you hooked on the delicious pulpiness of its lurid fiction .</td>
+      <td>a fascinating dark thriller that {mask} you hooked on the delicious pulpiness of its lurid fiction .</td>
+      <td>a fascinating dark thriller that {pos_verb} you hooked on the delicious pulpiness of its lurid fiction .</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>1</td>
-      <td>the dramatic crisis doesn't always succeed in its quest to be taken seriously  but huppert's volatile performance makes for a riveting movie experience .</td>
-      <td>the dramatic crisis {mask} n't always succeed in its quest to be taken seriously but huppert 's volatile performance makes for a {mask} movie experience .</td>
-      <td>the dramatic crisis {neg_verb} n't always succeed in its quest to be taken seriously but huppert 's volatile performance makes for a {pos_adj} movie experience .</td>
+      <td>0</td>
+      <td>could the country bears really be as bad as its trailers ?</td>
+      <td>could the country bears really be as {mask} as its trailers ?</td>
+      <td>could the country bears really be as {neg_adj} as its trailers ?</td>
     </tr>
     <tr>
       <th>11</th>
       <td>0</td>
-      <td>the movie is undone by a filmmaking methodology that's just experimental enough to alienate the mainstream audience while ringing cliched to hardened indie-heads .</td>
-      <td>the movie is {mask} by a filmmaking methodology that 's just experimental enough to alienate the mainstream audience while ringing {mask} to hardened indie-heads .</td>
-      <td>the movie is {neg_adj} by a filmmaking methodology that 's just experimental enough to alienate the mainstream audience while ringing {neg_verb} to hardened indie-heads .</td>
+      <td>the movie has generic virtues  and despite a lot of involved talent  seems done by the numbers .</td>
+      <td>the movie has {mask} virtues and despite a lot of involved talent seems done by the numbers .</td>
+      <td>the movie has {neg_adj} virtues and despite a lot of involved talent seems done by the numbers .</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>1</td>
-      <td>this in-depth study of important developments of the computer industry should make it required viewing in university computer science departments for years to come .</td>
-      <td>this {mask} study of important developments of the computer industry {mask} make it required viewing in university computer science departments for years to come .</td>
-      <td>this {pos_adj} study of important developments of the computer industry {neg_verb} make it required viewing in university computer science departments for years to come .</td>
+      <td>0</td>
+      <td>doesn't get the job done  running off the limited chemistry created by ralph fiennes and jennifer lopez .</td>
+      <td>does n't get the job done {mask} off the limited chemistry created by ralph fiennes and jennifer lopez .</td>
+      <td>does n't get the job done {neg_verb} off the limited chemistry created by ralph fiennes and jennifer lopez .</td>
     </tr>
     <tr>
       <th>13</th>
       <td>1</td>
-      <td>how much you are moved by the emotional tumult of [fran?ois and mich?le's] relationship depends a lot on how interesting and likable you find them .</td>
-      <td>how {mask} you are moved by the emotional tumult of [ fran ? ois and mich ? le 's ] relationship {mask} a lot on how interesting and likable you find them .</td>
-      <td>how {pos_adj} you are moved by the emotional tumult of [ fran ? ois and mich ? le 's ] relationship {neg_verb} a lot on how interesting and likable you find them .</td>
+      <td>the movie is saved from unbearable lightness by the simplicity of the storytelling and the authenticity of the performances .</td>
+      <td>the movie is saved from {mask} lightness by the simplicity of the storytelling and the authenticity of the performances .</td>
+      <td>the movie is saved from {neg_adj} lightness by the simplicity of the storytelling and the authenticity of the performances .</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>1</td>
-      <td>the determination of pinochet's victims to seek justice  and their often heartbreaking testimony  spoken directly into director patricio guzman's camera  pack a powerful emotional wallop .</td>
-      <td>the determination of pinochet 's victims to seek justice and their often {mask} testimony spoken directly into director patricio guzman 's camera pack a {mask} emotional wallop .</td>
-      <td>the determination of pinochet 's victims to seek justice and their often {pos_verb} testimony spoken directly into director patricio guzman 's camera pack a {pos_adj} emotional wallop .</td>
+      <td>0</td>
+      <td>an empty exercise  a florid but ultimately vapid crime melodrama with lots of surface flash but little emotional resonance .</td>
+      <td>an empty exercise a florid but ultimately vapid crime melodrama with lots of surface flash but {mask} emotional resonance .</td>
+      <td>an empty exercise a florid but ultimately vapid crime melodrama with lots of surface flash but {neg_adj} emotional resonance .</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>1</td>
-      <td>more concerned with overall feelings  broader ideas  and open-ended questions than concrete story and definitive answers  soderbergh's solaris is a gorgeous and deceptively minimalist cinematic tone poem .</td>
-      <td>more concerned with overall feelings broader ideas and open-ended questions than concrete story and definitive answers soderbergh 's solaris is a {mask} and {mask} minimalist cinematic tone poem .</td>
-      <td>more concerned with overall feelings broader ideas and open-ended questions than concrete story and definitive answers soderbergh 's solaris is a {pos_adj} and {pos_adj} minimalist cinematic tone poem .</td>
+      <td>0</td>
+      <td>hugh grant's act is so consuming that sometimes it's difficult to tell who the other actors in the movie are .</td>
+      <td>hugh grant 's act is so {mask} that sometimes it 's difficult to tell who the other actors in the movie are .</td>
+      <td>hugh grant 's act is so {neg_adj} that sometimes it 's difficult to tell who the other actors in the movie are .</td>
     </tr>
     <tr>
       <th>16</th>
       <td>0</td>
-      <td>as well-acted and well-intentioned as all or nothing is  however  the film comes perilously close to being too bleak  too pessimistic and too unflinching for its own good .</td>
-      <td>as well-acted and well-intentioned as all or nothing is however the film comes perilously close to being too bleak too {mask} and too {mask} for its own good .</td>
-      <td>as well-acted and well-intentioned as all or nothing is however the film comes perilously close to being too bleak too {neg_adj} and too {pos_adj} for its own good .</td>
+      <td>opens at a funeral  ends on the protagonist's death bed and doesn't get much livelier in the three hours in between .</td>
+      <td>opens at a funeral ends on the protagonist 's death bed and {mask} n't get much livelier in the three hours in between .</td>
+      <td>opens at a funeral ends on the protagonist 's death bed and {neg_verb} n't get much livelier in the three hours in between .</td>
     </tr>
     <tr>
       <th>17</th>
       <td>0</td>
-      <td>a dreary  incoherent  self-indulgent mess of a movie in which a bunch of pompous windbags drone on inanely for two hours .</td>
-      <td>a dreary incoherent {mask} mess of a movie in which a bunch of {mask} windbags drone on inanely for two hours .</td>
-      <td>a dreary incoherent {neg_adj} mess of a movie in which a bunch of {neg_adj} windbags drone on inanely for two hours .</td>
+      <td>may reawaken discussion of the kennedy assassination but this fictional film looks made for cable rather than for the big screen .</td>
+      <td>may {mask} discussion of the kennedy assassination but this fictional film looks made for cable rather than for the big screen .</td>
+      <td>may {neg_verb} discussion of the kennedy assassination but this fictional film looks made for cable rather than for the big screen .</td>
     </tr>
     <tr>
       <th>18</th>
       <td>0</td>
-      <td>like so many other allegedly scary movies  it gets so tangled up in the twist that it chokes the energy right out of the very audience it seeks to frighten .</td>
-      <td>like so many other allegedly scary movies it gets so tangled up in the twist that it {mask} the energy right out of the very audience it {mask} to frighten .</td>
-      <td>like so many other allegedly scary movies it gets so tangled up in the twist that it {neg_verb} the energy right out of the very audience it {neg_verb} to frighten .</td>
+      <td>this is mild-mannered  been-there material given a pedestrian spin by a director who needed a touch of the flamboyant  the outrageous .</td>
+      <td>this is mild-mannered been-there material given a {mask} spin by a director who needed a touch of the flamboyant the outrageous .</td>
+      <td>this is mild-mannered been-there material given a {neg_adj} spin by a director who needed a touch of the flamboyant the outrageous .</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>0</td>
-      <td>what remains is a variant of the nincompoop benigni persona  here a more annoying  though less angry version of the irresponsible sandlerian manchild  undercut by the voice of the star of road trip .</td>
-      <td>what remains {mask} a variant of the {mask} benigni persona here a more annoying though less angry version of the irresponsible sandlerian manchild undercut by the voice of the star of road trip .</td>
-      <td>what remains {pos_verb} a variant of the {pos_adj} benigni persona here a more annoying though less angry version of the irresponsible sandlerian manchild undercut by the voice of the star of road trip .</td>
+      <td>1</td>
+      <td>at its best  this is grand-scale moviemaking for a larger-than-life figure  an artist who has been awarded mythic status in contemporary culture .</td>
+      <td>at its best this is {mask} moviemaking for a larger-than-life figure an artist who has been awarded mythic status in contemporary culture .</td>
+      <td>at its best this is {pos_adj} moviemaking for a larger-than-life figure an artist who has been awarded mythic status in contemporary culture .</td>
     </tr>
     <tr>
       <th>20</th>
       <td>0</td>
-      <td>/ but daphne  you're too buff / fred thinks he's tough / and velma - wow  you've lost weight !</td>
-      <td>/ but daphne you 're too buff / fred {mask} he 's tough / and velma - wow you 've {mask} weight !</td>
-      <td>/ but daphne you 're too buff / fred {neg_verb} he 's tough / and velma - wow you 've {neg_verb} weight !</td>
+      <td>to call the other side of heaven " appalling " would be to underestimate just how dangerous entertainments like it can be .</td>
+      <td>to {mask} the other side of heaven `` appalling `` would be to underestimate just how dangerous entertainments like it can be .</td>
+      <td>to {neg_verb} the other side of heaven `` appalling `` would be to underestimate just how dangerous entertainments like it can be .</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>1</td>
-      <td>is inspiring ironic and revelatory of just how ridiculous and money-oriented the record industry really is .</td>
-      <td>is {mask} ironic and revelatory of just how {mask} and money-oriented the record industry really is .</td>
-      <td>is {pos_verb} ironic and revelatory of just how {neg_adj} and money-oriented the record industry really is .</td>
+      <td>0</td>
+      <td>it doesn't take a rocket scientist to figure out that this is a mormon family movie  and a sappy  preachy one at that .</td>
+      <td>it does n't take a rocket scientist to figure out that this is a mormon family movie and a {mask} preachy one at that .</td>
+      <td>it does n't take a rocket scientist to figure out that this is a mormon family movie and a {neg_adj} preachy one at that .</td>
     </tr>
     <tr>
       <th>22</th>
       <td>1</td>
-      <td>it also shows how deeply felt emotions can draw people together across the walls that might otherwise separate them .</td>
-      <td>it also {mask} how deeply felt emotions can draw people together across the walls that might {mask} separate them .</td>
-      <td>it also {neg_verb} how deeply felt emotions can draw people together across the walls that might {neg_verb} separate them .</td>
+      <td>captures all the longing  anguish and ache  the confusing sexual messages and the wish to be a part of that elusive adult world .</td>
+      <td>captures all the longing anguish and ache the {mask} sexual messages and the wish to be a part of that elusive adult world .</td>
+      <td>captures all the longing anguish and ache the {neg_verb} sexual messages and the wish to be a part of that elusive adult world .</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>0</td>
-      <td>is an inexpressible and drab wannabe looking for that exact niche .</td>
-      <td>is an inexpressible and {mask} wannabe {mask} for that exact niche .</td>
-      <td>is an inexpressible and {neg_adj} wannabe {pos_verb} for that exact niche .</td>
+      <td>1</td>
+      <td>the dramatic crisis doesn't always succeed in its quest to be taken seriously  but huppert's volatile performance makes for a riveting movie experience .</td>
+      <td>the dramatic crisis does n't always succeed in its quest to be taken seriously but huppert 's volatile performance makes for a {mask} movie experience .</td>
+      <td>the dramatic crisis does n't always succeed in its quest to be taken seriously but huppert 's volatile performance makes for a {pos_adj} movie experience .</td>
     </tr>
     <tr>
       <th>24</th>
+      <td>0</td>
+      <td>the movie is undone by a filmmaking methodology that's just experimental enough to alienate the mainstream audience while ringing cliched to hardened indie-heads .</td>
+      <td>the movie is {mask} by a filmmaking methodology that 's just experimental enough to alienate the mainstream audience while ringing cliched to hardened indie-heads .</td>
+      <td>the movie is {neg_adj} by a filmmaking methodology that 's just experimental enough to alienate the mainstream audience while ringing cliched to hardened indie-heads .</td>
+    </tr>
+    <tr>
+      <th>25</th>
       <td>1</td>
-      <td>this is a movie that is what it is : a pleasant distraction a friday night diversion an excuse to eat popcorn .</td>
-      <td>this is a movie that is what it is : a {mask} distraction a friday night diversion an excuse to {mask} popcorn .</td>
-      <td>this is a movie that is what it is : a {pos_adj} distraction a friday night diversion an excuse to {pos_verb} popcorn .</td>
+      <td>this in-depth study of important developments of the computer industry should make it required viewing in university computer science departments for years to come .</td>
+      <td>this {mask} study of important developments of the computer industry should make it required viewing in university computer science departments for years to come .</td>
+      <td>this {pos_adj} study of important developments of the computer industry should make it required viewing in university computer science departments for years to come .</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>1</td>
+      <td>the determination of pinochet's victims to seek justice  and their often heartbreaking testimony  spoken directly into director patricio guzman's camera  pack a powerful emotional wallop .</td>
+      <td>the determination of pinochet 's victims to seek justice and their often heartbreaking testimony spoken directly into director patricio guzman 's camera pack a {mask} emotional wallop .</td>
+      <td>the determination of pinochet 's victims to seek justice and their often heartbreaking testimony spoken directly into director patricio guzman 's camera pack a {pos_adj} emotional wallop .</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>1</td>
+      <td>ozpetek joins the ranks of those gay filmmakers who have used the emigre experience to explore same-sex culture in ways that elude the more nationally settled .</td>
+      <td>ozpetek joins the ranks of those gay filmmakers who have used the emigre experience to {mask} same-sex culture in ways that elude the more nationally settled .</td>
+      <td>ozpetek joins the ranks of those gay filmmakers who have used the emigre experience to {pos_verb} same-sex culture in ways that elude the more nationally settled .</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>1</td>
+      <td>more concerned with overall feelings  broader ideas  and open-ended questions than concrete story and definitive answers  soderbergh's solaris is a gorgeous and deceptively minimalist cinematic tone poem .</td>
+      <td>more concerned with overall feelings broader ideas and open-ended questions than concrete story and definitive answers soderbergh 's solaris is a {mask} and deceptively minimalist cinematic tone poem .</td>
+      <td>more concerned with overall feelings broader ideas and open-ended questions than concrete story and definitive answers soderbergh 's solaris is a {pos_adj} and deceptively minimalist cinematic tone poem .</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>1</td>
+      <td>a time machine  a journey back to your childhood  when cares melted away in the dark theater  and films had the ability to mesmerize  astonish and entertain .</td>
+      <td>a time machine a journey back to your childhood when cares melted away in the dark theater and films had the ability to {mask} astonish and entertain .</td>
+      <td>a time machine a journey back to your childhood when cares melted away in the dark theater and films had the ability to {pos_verb} astonish and entertain .</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>0</td>
+      <td>the two leads are almost good enough to camouflage the dopey plot  but so much naturalistic small talk  delivered in almost muffled exchanges  eventually has a lulling effect .</td>
+      <td>the two leads are almost good enough to camouflage the dopey plot but so much naturalistic small talk delivered in almost muffled exchanges eventually has a {mask} effect .</td>
+      <td>the two leads are almost good enough to camouflage the dopey plot but so much naturalistic small talk delivered in almost muffled exchanges eventually has a {neg_adj} effect .</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>1</td>
+      <td>straightforward and old-fashioned in the best possible senses of both those words  possession is a movie that puts itself squarely in the service of the lovers who inhabit it .</td>
+      <td>straightforward and old-fashioned in the best possible senses of both those words possession is a movie that {mask} itself squarely in the service of the lovers who inhabit it .</td>
+      <td>straightforward and old-fashioned in the best possible senses of both those words possession is a movie that {neg_verb} itself squarely in the service of the lovers who inhabit it .</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>0</td>
+      <td>a dreary  incoherent  self-indulgent mess of a movie in which a bunch of pompous windbags drone on inanely for two hours .</td>
+      <td>a dreary incoherent {mask} mess of a movie in which a bunch of pompous windbags drone on inanely for two hours .</td>
+      <td>a dreary incoherent {neg_adj} mess of a movie in which a bunch of pompous windbags drone on inanely for two hours .</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>0</td>
+      <td>a cacophony of pretentious  meaningless prattle .</td>
+      <td>a cacophony of {mask} meaningless prattle .</td>
+      <td>a cacophony of {neg_adj} meaningless prattle .</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>0</td>
+      <td>like so many other allegedly scary movies  it gets so tangled up in the twist that it chokes the energy right out of the very audience it seeks to frighten .</td>
+      <td>like so many other allegedly scary movies it gets so tangled up in the twist that it chokes the energy right out of the very audience it {mask} to frighten .</td>
+      <td>like so many other allegedly scary movies it gets so tangled up in the twist that it chokes the energy right out of the very audience it {neg_verb} to frighten .</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>1</td>
+      <td>it also shows how deeply felt emotions can draw people together across the walls that might otherwise separate them .</td>
+      <td>it also {mask} how deeply felt emotions can draw people together across the walls that might otherwise separate them .</td>
+      <td>it also {neg_verb} how deeply felt emotions can draw people together across the walls that might otherwise separate them .</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>0</td>
+      <td>is an inexpressible and drab wannabe looking for that exact niche .</td>
+      <td>is an inexpressible and {mask} wannabe looking for that exact niche .</td>
+      <td>is an inexpressible and {neg_adj} wannabe looking for that exact niche .</td>
     </tr>
   </tbody>
 </table>
@@ -15137,53 +15221,41 @@ Filtering instances by relevant words classification score greater than 0.8
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;pos_verb&#39;: [&#39;looking&#39;,
-  &#39;heartbreaking&#39;,
-  &#39;eat&#39;,
-  &#39;know&#39;,
-  &#39;is&#39;,
-  &#39;inspiring&#39;,
-  &#39;saved&#39;,
-  &#39;moviemaking&#39;],
- &#39;neg_verb&#39;: [&#39;shows&#39;,
-  &#39;thinks&#39;,
-  &#39;otherwise&#39;,
-  &#39;pile&#39;,
-  &#39;cliched&#39;,
+<pre>{&#39;pos_verb&#39;: [&#39;explore&#39;,
+  &#39;creating&#39;,
+  &#39;breathtaking&#39;,
+  &#39;mesmerize&#39;,
+  &#39;keeps&#39;,
+  &#39;revels&#39;],
+ &#39;neg_verb&#39;: [&#39;pile&#39;,
   &#39;seeks&#39;,
-  &#39;lost&#39;,
-  &#39;could&#39;,
-  &#39;should&#39;,
-  &#39;does&#39;,
-  &#39;depends&#39;,
-  &#39;chokes&#39;],
- &#39;pos_adj&#39;: [&#39;unflinching&#39;,
-  &#39;much&#39;,
-  &#39;grand-scale&#39;,
-  &#39;riveting&#39;,
+  &#39;reawaken&#39;,
+  &#39;shows&#39;,
+  &#39;lapses&#39;,
+  &#39;puts&#39;,
+  &#39;confusing&#39;,
+  &#39;call&#39;,
+  &#39;running&#39;,
+  &#39;does&#39;],
+ &#39;pos_adj&#39;: [&#39;riveting&#39;,
   &#39;in-depth&#39;,
-  &#39;intelligent&#39;,
-  &#39;nincompoop&#39;,
-  &#39;deceptively&#39;,
-  &#39;gorgeous&#39;,
-  &#39;pleasant&#39;,
-  &#39;powerful&#39;],
- &#39;neg_adj&#39;: [&#39;little&#39;,
-  &#39;unbearable&#39;,
+  &#39;grand-scale&#39;,
+  &#39;powerful&#39;,
+  &#39;rich&#39;,
+  &#39;gorgeous&#39;],
+ &#39;neg_adj&#39;: [&#39;bad&#39;,
+  &#39;sappy&#39;,
+  &#39;little&#39;,
   &#39;undone&#39;,
+  &#39;pretentious&#39;,
+  &#39;lulling&#39;,
   &#39;dull&#39;,
-  &#39;comic&#39;,
-  &#39;minimalist&#39;,
-  &#39;pessimistic&#39;,
-  &#39;ridiculous&#39;,
-  &#39;pompous&#39;,
-  &#39;consuming&#39;,
-  &#39;bad&#39;,
-  &#39;vapid&#39;,
-  &#39;human&#39;,
+  &#39;pedestrian&#39;,
   &#39;self-indulgent&#39;,
   &#39;drab&#39;,
-  &#39;difficult&#39;]}</pre>
+  &#39;consuming&#39;,
+  &#39;generic&#39;,
+  &#39;unbearable&#39;]}</pre>
 </div>
 
 </div>
@@ -15287,7 +15359,7 @@ Filtering instances by relevant words classification score greater than 0.8
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Running Test: MFT with vocabullary - template1
-Predicting 176 examples
+Predicting 10 examples
 </pre>
 </div>
 </div>
@@ -15313,53 +15385,77 @@ Predicting 176 examples
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Running Test: MFT with vocabullary - template2
-Predicting 128 examples
+Predicting 10 examples
 Running Test: MFT with vocabullary - template3
-Predicting 192 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template4
-Predicting 16 examples
+Predicting 10 examples
 Running Test: MFT with vocabullary - template5
-Predicting 192 examples
+Predicting 6 examples
 Running Test: MFT with vocabullary - template6
-Predicting 128 examples
+Predicting 6 examples
 Running Test: MFT with vocabullary - template7
-Predicting 16 examples
+Predicting 6 examples
 Running Test: MFT with vocabullary - template8
-Predicting 16 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template9
-Predicting 132 examples
+Predicting 6 examples
 Running Test: MFT with vocabullary - template10
-Predicting 88 examples
+Predicting 6 examples
 Running Test: MFT with vocabullary - template11
-Predicting 132 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template12
-Predicting 192 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template13
-Predicting 132 examples
+Predicting 10 examples
 Running Test: MFT with vocabullary - template14
-Predicting 132 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template15
-Predicting 88 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template16
-Predicting 11 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template17
-Predicting 176 examples
+Predicting 10 examples
 Running Test: MFT with vocabullary - template18
-Predicting 16 examples
+Predicting 10 examples
 Running Test: MFT with vocabullary - template19
-Predicting 12 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template20
-Predicting 88 examples
+Predicting 6 examples
 Running Test: MFT with vocabullary - template21
-Predicting 12 examples
+Predicting 10 examples
 Running Test: MFT with vocabullary - template22
-Predicting 128 examples
+Predicting 13 examples
 Running Test: MFT with vocabullary - template23
-Predicting 12 examples
+Predicting 10 examples
 Running Test: MFT with vocabullary - template24
-Predicting 128 examples
+Predicting 6 examples
 Running Test: MFT with vocabullary - template25
-Predicting 88 examples
+Predicting 13 examples
+Running Test: MFT with vocabullary - template26
+Predicting 6 examples
+Running Test: MFT with vocabullary - template27
+Predicting 6 examples
+Running Test: MFT with vocabullary - template28
+Predicting 6 examples
+Running Test: MFT with vocabullary - template29
+Predicting 6 examples
+Running Test: MFT with vocabullary - template30
+Predicting 6 examples
+Running Test: MFT with vocabullary - template31
+Predicting 13 examples
+Running Test: MFT with vocabullary - template32
+Predicting 10 examples
+Running Test: MFT with vocabullary - template33
+Predicting 13 examples
+Running Test: MFT with vocabullary - template34
+Predicting 13 examples
+Running Test: MFT with vocabullary - template35
+Predicting 10 examples
+Running Test: MFT with vocabullary - template36
+Predicting 10 examples
+Running Test: MFT with vocabullary - template37
+Predicting 13 examples
 </pre>
 </div>
 </div>
@@ -15397,238 +15493,226 @@ Predicting 88 examples
 <pre>Vocabullary
 
 Test: MFT with vocabullary - template1
-Test cases:      176
-Fails (rate):    37 (21.0%)
+Test cases:      10
+Fails (rate):    2 (20.0%)
 
 Example fails:
-0.4 riveting caustic take on a great writer and dubious unbearable being .
+0.8 involving at times but shows quite casually into the absurd .
 ----
-0.0 deceptively caustic take on a great writer and dubious unbearable being .
-----
-0.1 grand-scale caustic take on a great writer and dubious ridiculous being .
+0.9 involving at times but seeks quite casually into the absurd .
 ----
 
 
 Test: MFT with vocabullary - template2
-Test cases:      128
-Fails (rate):    12 (9.4%)
+Test cases:      10
+Fails (rate):    1 (10.0%)
 
 Example fails:
-1.0 it &#39;s a comic sign in a thriller when you instantly inspiring whodunit .
-----
-0.8 it &#39;s a little sign in a thriller when you instantly inspiring whodunit .
-----
-1.0 it &#39;s a consuming sign in a thriller when you instantly inspiring whodunit .
+0.6 simply shows n&#39;t have sufficient heft to justify its two-hour running time .
 ----
 
 
 Test: MFT with vocabullary - template3
-Test cases:      192
-Fails (rate):    0 (0.0%)
+Test cases:      13
+Fails (rate):    1 (7.7%)
+
+Example fails:
+1.0 it &#39;s a consuming sign in a thriller when you instantly know whodunit .
+----
 
 
 Test: MFT with vocabullary - template4
-Test cases:      16
+Test cases:      10
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template5
-Test cases:      192
+Test cases:      6
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template6
-Test cases:      128
+Test cases:      6
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template7
-Test cases:      16
-Fails (rate):    2 (12.5%)
-
-Example fails:
-0.8 an empty exercise a florid but ultimately human crime melodrama with lots of surface flash but human emotional resonance .
-----
-0.7 an empty exercise a florid but ultimately comic crime melodrama with lots of surface flash but comic emotional resonance .
-----
+Test cases:      6
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template8
-Test cases:      16
+Test cases:      13
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template9
-Test cases:      132
-Fails (rate):    60 (45.5%)
-
-Example fails:
-1.0 opens at a funeral ends on the protagonist &#39;s death bed and lost n&#39;t get in-depth livelier in the three hours in between .
-----
-1.0 opens at a funeral ends on the protagonist &#39;s death bed and shows n&#39;t get unflinching livelier in the three hours in between .
-----
-1.0 opens at a funeral ends on the protagonist &#39;s death bed and otherwise n&#39;t get in-depth livelier in the three hours in between .
-----
+Test cases:      6
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template10
-Test cases:      88
-Fails (rate):    7 (8.0%)
-
-Example fails:
-0.4 at its best this is deceptively know for a larger-than-life figure an artist who has been awarded mythic status in contemporary culture .
-----
-0.3 at its best this is nincompoop looking for a larger-than-life figure an artist who has been awarded mythic status in contemporary culture .
-----
-0.1 at its best this is deceptively eat for a larger-than-life figure an artist who has been awarded mythic status in contemporary culture .
-----
+Test cases:      6
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template11
-Test cases:      132
+Test cases:      13
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template12
-Test cases:      192
-Fails (rate):    4 (2.1%)
-
-Example fails:
-0.7 the movie is human by a filmmaking methodology that &#39;s just experimental enough to alienate the mainstream audience while ringing shows to hardened indie-heads .
-----
-0.9 the movie is human by a filmmaking methodology that &#39;s just experimental enough to alienate the mainstream audience while ringing should to hardened indie-heads .
-----
-1.0 the movie is human by a filmmaking methodology that &#39;s just experimental enough to alienate the mainstream audience while ringing could to hardened indie-heads .
-----
+Test cases:      13
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template13
-Test cases:      132
-Fails (rate):    23 (17.4%)
+Test cases:      10
+Fails (rate):    1 (10.0%)
 
 Example fails:
-0.4 this nincompoop study of important developments of the computer industry could make it required viewing in university computer science departments for years to come .
-----
-0.0 this much study of important developments of the computer industry lost make it required viewing in university computer science departments for years to come .
-----
-0.1 this deceptively study of important developments of the computer industry lost make it required viewing in university computer science departments for years to come .
+0.9 does n&#39;t get the job done shows off the limited chemistry created by ralph fiennes and jennifer lopez .
 ----
 
 
 Test: MFT with vocabullary - template14
-Test cases:      132
-Fails (rate):    8 (6.1%)
-
-Example fails:
-0.2 how much you are moved by the emotional tumult of [ fran ? ois and mich ? le &#39;s ] relationship chokes a lot on how interesting and likable you find them .
-----
-0.1 how nincompoop you are moved by the emotional tumult of [ fran ? ois and mich ? le &#39;s ] relationship lost a lot on how interesting and likable you find them .
-----
-0.2 how unflinching you are moved by the emotional tumult of [ fran ? ois and mich ? le &#39;s ] relationship chokes a lot on how interesting and likable you find them .
-----
+Test cases:      13
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template15
-Test cases:      88
+Test cases:      13
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template16
-Test cases:      11
-Fails (rate):    3 (27.3%)
-
-Example fails:
-0.0 more concerned with overall feelings broader ideas and open-ended questions than concrete story and definitive answers soderbergh &#39;s solaris is a deceptively and deceptively minimalist cinematic tone poem .
-----
-0.0 more concerned with overall feelings broader ideas and open-ended questions than concrete story and definitive answers soderbergh &#39;s solaris is a nincompoop and nincompoop minimalist cinematic tone poem .
-----
-0.0 more concerned with overall feelings broader ideas and open-ended questions than concrete story and definitive answers soderbergh &#39;s solaris is a much and much minimalist cinematic tone poem .
-----
-
-
-Test: MFT with vocabullary - template17
-Test cases:      176
+Test cases:      13
 Fails (rate):    0 (0.0%)
 
 
+Test: MFT with vocabullary - template17
+Test cases:      10
+Fails (rate):    1 (10.0%)
+
+Example fails:
+1.0 opens at a funeral ends on the protagonist &#39;s death bed and shows n&#39;t get much livelier in the three hours in between .
+----
+
+
 Test: MFT with vocabullary - template18
-Test cases:      16
+Test cases:      10
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template19
-Test cases:      12
+Test cases:      13
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template20
-Test cases:      88
+Test cases:      6
 Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template21
-Test cases:      12
-Fails (rate):    9 (75.0%)
-
-Example fails:
-0.9 / but daphne you &#39;re too buff / fred pile he &#39;s tough / and velma - wow you &#39;ve pile weight !
-----
-0.9 / but daphne you &#39;re too buff / fred should he &#39;s tough / and velma - wow you &#39;ve should weight !
-----
-1.0 / but daphne you &#39;re too buff / fred could he &#39;s tough / and velma - wow you &#39;ve could weight !
-----
+Test cases:      10
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template22
-Test cases:      128
-Fails (rate):    8 (6.2%)
-
-Example fails:
-0.0 is looking ironic and revelatory of just how dull and money-oriented the record industry really is .
-----
-0.0 is know ironic and revelatory of just how dull and money-oriented the record industry really is .
-----
-0.0 is looking ironic and revelatory of just how vapid and money-oriented the record industry really is .
-----
+Test cases:      13
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template23
-Test cases:      12
-Fails (rate):    5 (41.7%)
-
-Example fails:
-0.0 it also lost how deeply felt emotions can draw people together across the walls that might lost separate them .
-----
-0.0 it also cliched how deeply felt emotions can draw people together across the walls that might cliched separate them .
-----
-0.1 it also pile how deeply felt emotions can draw people together across the walls that might pile separate them .
-----
+Test cases:      10
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template24
-Test cases:      128
-Fails (rate):    7 (5.5%)
-
-Example fails:
-1.0 is an inexpressible and consuming wannabe inspiring for that exact niche .
-----
-0.5 is an inexpressible and consuming wannabe heartbreaking for that exact niche .
-----
-0.5 is an inexpressible and little wannabe inspiring for that exact niche .
-----
+Test cases:      6
+Fails (rate):    0 (0.0%)
 
 
 Test: MFT with vocabullary - template25
-Test cases:      88
-Fails (rate):    20 (22.7%)
+Test cases:      13
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template26
+Test cases:      6
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template27
+Test cases:      6
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template28
+Test cases:      6
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template29
+Test cases:      6
+Fails (rate):    1 (16.7%)
 
 Example fails:
-0.4 this is a movie that is what it is : a deceptively distraction a friday night diversion an excuse to moviemaking popcorn .
+0.2 more concerned with overall feelings broader ideas and open-ended questions than concrete story and definitive answers soderbergh &#39;s solaris is a grand-scale and deceptively minimalist cinematic tone poem .
 ----
-0.3 this is a movie that is what it is : a deceptively distraction a friday night diversion an excuse to looking popcorn .
+
+
+Test: MFT with vocabullary - template30
+Test cases:      6
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template31
+Test cases:      13
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template32
+Test cases:      10
+Fails (rate):    2 (20.0%)
+
+Example fails:
+0.0 straightforward and old-fashioned in the best possible senses of both those words possession is a movie that confusing itself squarely in the service of the lovers who inhabit it .
 ----
-0.2 this is a movie that is what it is : a much distraction a friday night diversion an excuse to is popcorn .
+0.0 straightforward and old-fashioned in the best possible senses of both those words possession is a movie that lapses itself squarely in the service of the lovers who inhabit it .
 ----
+
+
+Test: MFT with vocabullary - template33
+Test cases:      13
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template34
+Test cases:      13
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template35
+Test cases:      10
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template36
+Test cases:      10
+Fails (rate):    2 (20.0%)
+
+Example fails:
+0.0 it also confusing how deeply felt emotions can draw people together across the walls that might otherwise separate them .
+----
+0.0 it also lapses how deeply felt emotions can draw people together across the walls that might otherwise separate them .
+----
+
+
+Test: MFT with vocabullary - template37
+Test cases:      13
+Fails (rate):    0 (0.0%)
 
 
 
@@ -15705,12 +15789,12 @@ Example fails:
 
 
 
-<div id="4db6dc72-9c47-438a-a598-83ef8a927a32" class="jupyter-widgets jp-OutputArea-output ">
+<div id="691eb722-159e-43ab-bfcb-1d1baebaaa02" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('4db6dc72-9c47-438a-a598-83ef8a927a32');
+var element = document.getElementById('691eb722-159e-43ab-bfcb-1d1baebaaa02');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "2b5574d490454546ab3163ed281d2aaf", "version_major": 2, "version_minor": 0}
+{"model_id": "64bdaced9f124939aa5e2d65e8a64cc9", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 

@@ -14785,7 +14785,7 @@ Predicting inputs...
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tg</span> <span class="o">=</span> <span class="n">PosNegTemplateGeneratorApp2</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">models</span><span class="p">)</span>
-<span class="n">templates</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">generate_templates</span><span class="p">(</span><span class="n">instances</span><span class="p">)</span>
+<span class="n">templates</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">generate_templates</span><span class="p">(</span><span class="n">instances</span><span class="p">,</span> <span class="n">n_masks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ranked_words_count</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14837,7 +14837,7 @@ Filtering instances by contaning ranked words...
 Ranking words using Replace-1 Score...
 :: Word ranking done.
 Filtering instances by relevant words...
-:: 1 sentences remaining.
+:: 11 sentences remaining.
 Predicting inputs...
 :: Sentence predictions done.
 </pre>
@@ -14851,7 +14851,7 @@ Predicting inputs...
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Tempo-de-execu&#231;&#227;o-para-100-inst&#226;ncias:-5m-10.4s">Tempo de execu&#231;&#227;o para 100 inst&#226;ncias: 5m 10.4s<a class="anchor-link" href="#Tempo-de-execu&#231;&#227;o-para-100-inst&#226;ncias:-5m-10.4s">&#182;</a></h4>
+<h4 id="Tempo-de-execu&#231;&#227;o-para-100-inst&#226;ncias:-4m-10.4s">Tempo de execu&#231;&#227;o para 100 inst&#226;ncias: 4m 10.4s<a class="anchor-link" href="#Tempo-de-execu&#231;&#227;o-para-100-inst&#226;ncias:-4m-10.4s">&#182;</a></h4>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14909,9 +14909,79 @@ Predicting inputs...
     <tr>
       <th>0</th>
       <td>0</td>
+      <td>could the country bears really be as bad as its trailers ?</td>
+      <td>could the country bears really be as {mask} as its trailers ?</td>
+      <td>could the country bears really be as {neg_adj} as its trailers ?</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>you'll probably love it .</td>
+      <td>you 'll probably {mask} it .</td>
+      <td>you 'll probably {pos_verb} it .</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>hits all the verbal marks it should .</td>
+      <td>hits all the verbal marks it {mask} .</td>
+      <td>hits all the verbal marks it {neg_verb} .</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>for the future  one hopes mr .</td>
+      <td>for the future one {mask} mr .</td>
+      <td>for the future one {neg_verb} mr .</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>the charming result is festival in cannes .</td>
+      <td>the {mask} result is festival in cannes .</td>
+      <td>the {pos_adj} result is festival in cannes .</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>half of it is composed of snappy patter and pseudo-sophisticated cultural observations  while the remainder .</td>
+      <td>half of it is composed of snappy patter and {mask} cultural observations while the remainder .</td>
+      <td>half of it is composed of snappy patter and {neg_adj} cultural observations while the remainder .</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>a dreary  incoherent  self-indulgent mess of a movie in which a bunch of pompous windbags drone on inanely for two hours .</td>
+      <td>a dreary incoherent {mask} mess of a movie in which a bunch of pompous windbags drone on inanely for two hours .</td>
+      <td>a dreary incoherent {neg_adj} mess of a movie in which a bunch of pompous windbags drone on inanely for two hours .</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>a cacophony of pretentious  meaningless prattle .</td>
+      <td>a cacophony of {mask} meaningless prattle .</td>
+      <td>a cacophony of {neg_adj} meaningless prattle .</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
       <td>/ but daphne  you're too buff / fred thinks he's tough / and velma - wow  you've lost weight !</td>
-      <td>/ but daphne you 're too buff / fred {mask} he 's tough / and velma - wow you 've {mask} weight !</td>
-      <td>/ but daphne you 're too buff / fred {neg_verb} he 's tough / and velma - wow you 've {neg_verb} weight !</td>
+      <td>/ but daphne you 're too buff / fred thinks he 's tough / and velma - wow you 've {mask} weight !</td>
+      <td>/ but daphne you 're too buff / fred thinks he 's tough / and velma - wow you 've {neg_verb} weight !</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>whereas the extremely competent hitman films such as pulp fiction and get shorty resonate a sardonic verve to their caustic purpose for existing  who is cletis tout ?</td>
+      <td>whereas the extremely competent hitman films such as pulp fiction and get shorty resonate a {mask} verve to their caustic purpose for existing who is cletis tout ?</td>
+      <td>whereas the extremely competent hitman films such as pulp fiction and get shorty resonate a {neg_adj} verve to their caustic purpose for existing who is cletis tout ?</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>this is a movie that is what it is : a pleasant distraction a friday night diversion an excuse to eat popcorn .</td>
+      <td>this is a movie that is what it is : a {mask} distraction a friday night diversion an excuse to eat popcorn .</td>
+      <td>this is a movie that is what it is : a {pos_adj} distraction a friday night diversion an excuse to eat popcorn .</td>
     </tr>
   </tbody>
 </table>
@@ -14952,7 +15022,14 @@ Predicting inputs...
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;pos_verb&#39;: [], &#39;neg_verb&#39;: [&#39;lost&#39;, &#39;thinks&#39;], &#39;pos_adj&#39;: [], &#39;neg_adj&#39;: []}</pre>
+<pre>{&#39;pos_verb&#39;: [&#39;love&#39;],
+ &#39;neg_verb&#39;: [&#39;lost&#39;, &#39;should&#39;, &#39;hopes&#39;],
+ &#39;pos_adj&#39;: [&#39;pleasant&#39;, &#39;charming&#39;],
+ &#39;neg_adj&#39;: [&#39;bad&#39;,
+  &#39;pretentious&#39;,
+  &#39;pseudo-sophisticated&#39;,
+  &#39;self-indulgent&#39;,
+  &#39;sardonic&#39;]}</pre>
 </div>
 
 </div>
@@ -15057,7 +15134,7 @@ Predicting inputs...
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Running Test: MFT with vocabullary - template1
-Predicting 2 examples
+Predicting 5 examples
 </pre>
 </div>
 </div>
@@ -15071,6 +15148,37 @@ Predicting 2 examples
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>&lt;ipython-input-3-263ca9d23a33&gt;:23: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
   prob = softmax(tensor_logits[0]).detach().numpy()
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Running Test: MFT with vocabullary - template2
+Predicting 1 examples
+Running Test: MFT with vocabullary - template3
+Predicting 3 examples
+Running Test: MFT with vocabullary - template4
+Predicting 3 examples
+Running Test: MFT with vocabullary - template5
+Predicting 2 examples
+Running Test: MFT with vocabullary - template6
+Predicting 5 examples
+Running Test: MFT with vocabullary - template7
+Predicting 5 examples
+Running Test: MFT with vocabullary - template8
+Predicting 5 examples
+Running Test: MFT with vocabullary - template9
+Predicting 3 examples
+Running Test: MFT with vocabullary - template10
+Predicting 5 examples
+Running Test: MFT with vocabullary - template11
+Predicting 2 examples
 </pre>
 </div>
 </div>
@@ -15108,12 +15216,80 @@ Predicting 2 examples
 <pre>Vocabullary
 
 Test: MFT with vocabullary - template1
-Test cases:      2
-Fails (rate):    1 (50.0%)
+Test cases:      5
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template2
+Test cases:      1
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template3
+Test cases:      3
+Fails (rate):    1 (33.3%)
 
 Example fails:
-0.9 / but daphne you &#39;re too buff / fred thinks he &#39;s tough / and velma - wow you &#39;ve thinks weight !
+0.8 hits all the verbal marks it should .
 ----
+
+
+Test: MFT with vocabullary - template4
+Test cases:      3
+Fails (rate):    1 (33.3%)
+
+Example fails:
+0.0 for the future one lost mr .
+----
+
+
+Test: MFT with vocabullary - template5
+Test cases:      2
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template6
+Test cases:      5
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template7
+Test cases:      5
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template8
+Test cases:      5
+Fails (rate):    0 (0.0%)
+
+
+Test: MFT with vocabullary - template9
+Test cases:      3
+Fails (rate):    2 (66.7%)
+
+Example fails:
+0.9 / but daphne you &#39;re too buff / fred thinks he &#39;s tough / and velma - wow you &#39;ve hopes weight !
+----
+0.8 / but daphne you &#39;re too buff / fred thinks he &#39;s tough / and velma - wow you &#39;ve should weight !
+----
+
+
+Test: MFT with vocabullary - template10
+Test cases:      5
+Fails (rate):    5 (100.0%)
+
+Example fails:
+0.1 whereas the extremely competent hitman films such as pulp fiction and get shorty resonate a pseudo-sophisticated verve to their caustic purpose for existing who is cletis tout ?
+----
+0.3 whereas the extremely competent hitman films such as pulp fiction and get shorty resonate a sardonic verve to their caustic purpose for existing who is cletis tout ?
+----
+0.3 whereas the extremely competent hitman films such as pulp fiction and get shorty resonate a self-indulgent verve to their caustic purpose for existing who is cletis tout ?
+----
+
+
+Test: MFT with vocabullary - template11
+Test cases:      2
+Fails (rate):    0 (0.0%)
 
 
 
@@ -15138,53 +15314,6 @@ Example fails:
      </div>
 </div>
 </div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">suite</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Vocabullary
-
-Test: MFT with vocabullary - template1
-Test cases:      2
-Fails (rate):    1 (50.0%)
-
-Example fails:
-0.9 / but daphne you &#39;re too buff / fred thinks he &#39;s tough / and velma - wow you &#39;ve thinks weight !
-----
-
-
-
-
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -15237,12 +15366,12 @@ Example fails:
 
 
 
-<div id="80210e6d-25db-4724-93bc-142a828a59fe" class="jupyter-widgets jp-OutputArea-output ">
+<div id="7c1cbe3f-259b-47ea-803d-3ccddd51905b" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('80210e6d-25db-4724-93bc-142a828a59fe');
+var element = document.getElementById('7c1cbe3f-259b-47ea-803d-3ccddd51905b');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "e287333ae84a45dda44569cb524a5630", "version_major": 2, "version_minor": 0}
+{"model_id": "90ab9955486e41848ca6f06155679d5c", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 

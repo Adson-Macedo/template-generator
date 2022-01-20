@@ -33,6 +33,9 @@ class Token:
     @property
     def is_predicted(self):
         return self.prediction != None
+    
+    def __str__(self):
+        return  '{'+f'word: {self.word}, index: {self.index}, tag: {self.tag}, rank_score: {self.rank_score}'+'}'
 
 
 class Instance:

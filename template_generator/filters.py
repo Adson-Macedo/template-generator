@@ -83,12 +83,16 @@ class RelevantWordsFilter(Filter):
         tokens = input.sorted_tokens[:ranked_words_count]
         if len(tokens) == 0:
             return False
-
+        print(relevant_tags)
+        for token in tokens:
+            print(token) 
+        print(' ')       
         return len([token for token in tokens if token.tag in relevant_tags]) >= n_words
 
 
     @classmethod
     def apply(cls, inputs, relevant_tags, n_words=2, ranked_words_count=2):
+        print(ranked_words_count)
         print(f'Filtering instances by relevant words...')
         return list(filter(lambda x: cls.__filter_by_relevance(x, relevant_tags, n_words, ranked_words_count), inputs))
 
