@@ -4,7 +4,8 @@ from template_generator.template_generation import (
     GenericTemplateGeneratorApp3, 
     GenericTemplateGeneratorApp4,
     GenericTemplateGeneratorApp5,
-    GenericTemplateGeneratorRandom
+    GenericTemplateGeneratorRandom,
+    GenericTemplateGeneratorTest
     )
 from template_generator.word_ranking import WordRankR1S
 from template_generator.utils.utils import make_prediction
@@ -15,14 +16,12 @@ class PosNegTemplateGeneratorApp1(GenericTemplateGeneratorApp1):
 
     def __init__(self, model, oracle_models):
         super().__init__(WordRankR1S, model, oracle_models)
-        self.__lexicons = {'pos_verb': set(), 'neg_verb': set(), 'pos_adj': set(), 'neg_adj': set()}
+        self.__lexicons = {'pos_adj': set(), 'neg_adj': set()}
 
 
     @property
     def lexicons(self):
         return {
-            'pos_verb': list(self.__lexicons['pos_verb']), 
-            'neg_verb': list(self.__lexicons['neg_verb']), 
             'pos_adj': list(self.__lexicons['pos_adj']), 
             'neg_adj': list(self.__lexicons['neg_adj'])
             }
@@ -30,7 +29,7 @@ class PosNegTemplateGeneratorApp1(GenericTemplateGeneratorApp1):
 
     @property
     def relevant_tags(self):
-        return ['VERB', 'ADJ']
+        return ['ADJ']
 
 
     def replace_with_masks(self, sentences, n_words=2):
@@ -63,14 +62,12 @@ class PosNegTemplateGeneratorApp2(GenericTemplateGeneratorApp2):
 
     def __init__(self, model, oracle_models):
         super().__init__(WordRankR1S, model, oracle_models)
-        self.__lexicons = {'pos_verb': set(), 'neg_verb': set(), 'pos_adj': set(), 'neg_adj': set()}
+        self.__lexicons = {'pos_adj': set(), 'neg_adj': set()}
 
 
     @property
     def lexicons(self):
-        return {
-            'pos_verb': list(self.__lexicons['pos_verb']), 
-            'neg_verb': list(self.__lexicons['neg_verb']), 
+        return { 
             'pos_adj': list(self.__lexicons['pos_adj']), 
             'neg_adj': list(self.__lexicons['neg_adj'])
             }
@@ -78,7 +75,7 @@ class PosNegTemplateGeneratorApp2(GenericTemplateGeneratorApp2):
 
     @property
     def relevant_tags(self):
-        return ['VERB', 'ADJ']
+        return ['ADJ']
 
 
     def replace_with_masks(self, sentences, n_words=2):
@@ -112,14 +109,12 @@ class PosNegTemplateGeneratorApp3(GenericTemplateGeneratorApp3):
 
     def __init__(self, model, oracle_models):
         super().__init__(WordRankR1S, model, oracle_models)
-        self.__lexicons = {'pos_verb': set(), 'neg_verb': set(), 'pos_adj': set(), 'neg_adj': set()}
+        self.__lexicons = {'pos_adj': set(), 'neg_adj': set()}
 
 
     @property
     def lexicons(self):
-        return {
-            'pos_verb': list(self.__lexicons['pos_verb']), 
-            'neg_verb': list(self.__lexicons['neg_verb']), 
+        return { 
             'pos_adj': list(self.__lexicons['pos_adj']), 
             'neg_adj': list(self.__lexicons['neg_adj'])
             }
@@ -127,7 +122,7 @@ class PosNegTemplateGeneratorApp3(GenericTemplateGeneratorApp3):
 
     @property
     def relevant_tags(self):
-        return ['VERB', 'ADJ']
+        return ['ADJ']
 
 
     def replace_with_masks(self, sentences, n_words=2):
@@ -161,14 +156,12 @@ class PosNegTemplateGeneratorApp4(GenericTemplateGeneratorApp4):
 
     def __init__(self, model, oracle_models):
         super().__init__(WordRankR1S, model, oracle_models)
-        self.__lexicons = {'pos_verb': set(), 'neg_verb': set(), 'pos_adj': set(), 'neg_adj': set()}
+        self.__lexicons = {'pos_adj': set(), 'neg_adj': set()}
 
 
     @property
     def lexicons(self):
-        return {
-            'pos_verb': list(self.__lexicons['pos_verb']), 
-            'neg_verb': list(self.__lexicons['neg_verb']), 
+        return { 
             'pos_adj': list(self.__lexicons['pos_adj']), 
             'neg_adj': list(self.__lexicons['neg_adj'])
             }
@@ -176,7 +169,7 @@ class PosNegTemplateGeneratorApp4(GenericTemplateGeneratorApp4):
 
     @property
     def relevant_tags(self):
-        return ['VERB', 'ADJ']
+        return ['ADJ']
 
 
     def replace_with_masks(self, sentences, n_words=2):
@@ -210,14 +203,12 @@ class PosNegTemplateGeneratorApp5(GenericTemplateGeneratorApp5):
 
     def __init__(self, model, oracle_models):
         super().__init__(WordRankR1S, model, oracle_models)
-        self.__lexicons = {'pos_verb': set(), 'neg_verb': set(), 'pos_adj': set(), 'neg_adj': set()}
+        self.__lexicons = {'pos_adj': set(), 'neg_adj': set()}
 
 
     @property
     def lexicons(self):
-        return {
-            'pos_verb': list(self.__lexicons['pos_verb']), 
-            'neg_verb': list(self.__lexicons['neg_verb']), 
+        return { 
             'pos_adj': list(self.__lexicons['pos_adj']), 
             'neg_adj': list(self.__lexicons['neg_adj'])
             }
@@ -225,7 +216,7 @@ class PosNegTemplateGeneratorApp5(GenericTemplateGeneratorApp5):
 
     @property
     def relevant_tags(self):
-        return ['VERB', 'ADJ']
+        return ['ADJ']
 
 
     def replace_with_masks(self, sentences, n_words=2):
@@ -259,14 +250,12 @@ class PosNegTemplateGeneratorRandom(GenericTemplateGeneratorRandom):
 
     def __init__(self, model, oracle_models):
         super().__init__(WordRankR1S, model, oracle_models)
-        self.__lexicons = {'pos_verb': set(), 'neg_verb': set(), 'pos_adj': set(), 'neg_adj': set()}
+        self.__lexicons = {'pos_adj': set(), 'neg_adj': set()}
 
 
     @property
     def lexicons(self):
-        return {
-            'pos_verb': list(self.__lexicons['pos_verb']), 
-            'neg_verb': list(self.__lexicons['neg_verb']), 
+        return { 
             'pos_adj': list(self.__lexicons['pos_adj']), 
             'neg_adj': list(self.__lexicons['neg_adj'])
             }
@@ -274,7 +263,7 @@ class PosNegTemplateGeneratorRandom(GenericTemplateGeneratorRandom):
 
     @property
     def relevant_tags(self):
-        return ['VERB', 'ADJ']
+        return ['ADJ']
 
 
     def replace_with_masks(self, sentences, n_words=2):
@@ -302,4 +291,50 @@ class PosNegTemplateGeneratorRandom(GenericTemplateGeneratorRandom):
 
     def generate_templates(self, texts_input, n_masks=2, k_templates=10):
         return super().generate_templates(texts_input, n_masks, k_templates)
+    
+class PosNegTemplateGeneratorTest(GenericTemplateGeneratorTest):
+
+    def __init__(self, model, oracle_models):
+        super().__init__(WordRankR1S, model, oracle_models)
+        self.__lexicons = {'pos_adj': set(), 'neg_adj': set()}
+
+
+    @property
+    def lexicons(self):
+        return { 
+            'pos_adj': list(self.__lexicons['pos_adj']), 
+            'neg_adj': list(self.__lexicons['neg_adj'])
+            }
+
+
+    @property
+    def relevant_tags(self):
+        return ['ADJ']
+
+
+    def replace_with_masks(self, sentences, n_words=2):
+        for sent in sentences:
+            # get target model
+            model = self.model
+            # get a list of tokens from sentence
+            tokens = sent.sorted_tokens
+            tokens = [token for token in tokens if token.tag in self.relevant_tags]
+
+            for token in tokens[:n_words]:
+                if not token.is_predicted:
+                    token.prediction = make_prediction(token.word, model)
+                
+                # Mount lex name based on prediction label and tag from token
+                lex_name = f'pos_{token.tag.lower()}' if token.prediction.label == 1 else f'neg_{token.tag.lower()}'
+                self.__lexicons[lex_name].add(token.word)
+                token.word = '{' + lex_name + '}'
+
+            sent.template_text = ' '.join([token.word for token in sent.tokens])
+            sent.masked_text = re.sub('{\S+}', '{mask}', sent.template_text)
+
+        return sentences
+
+
+    def generate_templates(self, texts_input, n_masks=2):
+        return super().generate_templates(texts_input, n_masks)    
 

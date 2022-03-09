@@ -326,4 +326,32 @@ class GenericTemplateGeneratorRandom(TemplateGenerator):
         self.sentences = sentences
 
         return sentences
+    
+# Test Approach
+class GenericTemplateGeneratorTest(TemplateGenerator):
+    
+    def generate_templates(self, texts_input, n_masks=2):
+        instances = [Instance(text) for text in texts_input]
+
+        # 1. Break instances into sentences
+        print('Converting texts to sentences...')
+        sentences = []
+        for instance in instances:
+            sentences.extend(instance.split_to_sentences())
+        print(f':: {len(sentences)} sentences were generated.')
+
+        # 2. Ranking words by its importance when predicted by target model
+        sentences = self.word_ranker.rank(sentences, self.model)
+        print(f':: Word ranking done.')
+
+        # 3. Predicting sentences with oracle models
+        for sent, preds in zip(sentences, self.oracle_model.predict_all(sentences)):
+            sent.predictions = preds
+        print(f':: Sentence predictions done.')
+
+        # 4. Replacing the n most relevant words with masks
+        sentences = self.replace_with_masks(sentences, n_masks)
+        self.sentences = sentences
+
+        return sentences
         
